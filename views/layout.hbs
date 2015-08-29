@@ -56,6 +56,12 @@
                     </div>
                 </nav>
             </header>
+            {{#if firstName}}
+	            <div id="greeting" style="float:right;">
+	            	<strong>Hi, {{firstName}}!</strong>
+	            	<a href="/users/logout">Log out</a>
+	            </div>
+            {{/if}}
 	        <div id="main" class="wrapper">
 	            <div id="primary" class="site-content">
 		            <div id="content" role="main">
