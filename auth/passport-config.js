@@ -11,7 +11,7 @@ module.exports = function() {
 			}
 			
 			if(!user || user.password !== password) {
-				console.log('user not found: email -> ' + user.email);
+				console.log('user not found: email -> ' + email);
 				return next(null, null);
 			}
 			

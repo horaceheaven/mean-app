@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var expressSession = require('express-session');
+var flash = require('connect-flash');
 
 var config = require('./config');
 var routes = require('./routes/index');
@@ -36,6 +37,7 @@ app.use(expressSession({
   resave: false
 }));
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
