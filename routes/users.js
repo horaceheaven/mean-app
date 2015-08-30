@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var userService = require('../services/user-service');
+var config = require('../config.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -34,14 +35,23 @@ router.post('/create', function(req, res, next) {
 	});
 });
 
-router.post('/login', passport.authenticate('local', {
-	failureRedirect: '/',
-	successRedirect: 'orders',
-	failureFlash: 'Invalid credentials'
+router.post('/login', 
+	function(req, res, next) {
+		req.session.orderId = 1234;
+		if(req.body.rememberMe) {
+			req.session.cookie.maxAge = config.cookieMaxAge;
+		}
+		next();
+	},
+	passport.authenticate('local', {
+		failureRedirect: '/',
+		successRedirect: '/orders',
+		failureFlash: 'Invalid credentials'
 }));
 
 router.get('/logout', function(req, res, next) {
 	req.logout();
+	req.session.destroy();
 	res.redirect('/');
 });
 

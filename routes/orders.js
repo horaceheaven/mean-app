@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
 	var vm = {
 		title: 'Place an order',
-		firstName: req.user ? req.user.firstName : null
+		firstName: req.user ? req.user.firstName : null,
+		orderId: req.session.orderId
 	};
 
 	console.log(JSON.stringify(vm));
