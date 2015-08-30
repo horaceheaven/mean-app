@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 var userService = require('../services/user-service');
 
@@ -29,6 +30,10 @@ router.post('/create', function(req, res, next) {
 		}
 		res.redirect('/orders');
 	});
+});
+
+router.post('/login', passport.authenticate('local'), function(req, res, next) {
+	res.redirect('/orders');
 });
 
 module.exports = router;
