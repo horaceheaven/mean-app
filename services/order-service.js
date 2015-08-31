@@ -1,6 +1,8 @@
 var ordrx = require('ordrin-api');
 var config = require('../config');
 
+var _ = require('lodash');
+
 var api = new ordrx.APIs(config.ordrxKey, ordrx.TEST);
 
 exports.getRestaurants = function(next) {
@@ -27,4 +29,16 @@ exports.getRestaurants = function(next) {
 	// 	});
 	// 	next(null, restaurants);
 	// });
+};
+
+exports.getRestaurantDetails = function(restaurantId, next) {
+	var restaurants = require('../data/ordrx.json');
+
+	restaurants.forEach(function(element, index){
+		if(element.hasOwnProperty('id') && element.id === restaurantId) {
+			return next(null, element);	
+		}
+	});
+
+	return next(null, null);
 };

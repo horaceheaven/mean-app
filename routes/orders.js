@@ -3,7 +3,6 @@ var orderService =  require('../services/order-service');
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
 	var vm = {
 		title: 'Place an order',
@@ -22,6 +21,15 @@ router.get('/api/restaurants', function(req, res, next) {
 			return res.status(500).json({error: 'failed to retrieve restaurants'});
 		}
 		res.json(restaurants);
+	});
+});
+
+router.get('/api/restaurant-details/:restId', function(req, res, next) {
+	orderService.getRestaurantDetails(req.params.restId, function(err, restDetails) {
+		if(err) {
+			return res.status(500).json({error: 'failed to retrieve restaurant details'});	
+		}
+		res.json(restDetails);
 	});
 });
 
