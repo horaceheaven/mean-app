@@ -1,3 +1,5 @@
+var orderService =  require('../services/order-service');
+
 var express = require('express');
 var router = express.Router();
 
@@ -12,6 +14,15 @@ router.get('/', function(req, res, next) {
 	console.log(JSON.stringify(vm));
   	
   	res.render('orders/index', vm);
+});
+
+router.get('/api/restaurants', function(req, res, next) {
+	orderService.getRestaurants(function(err, restaurants) {
+		if(err) {
+			return res.status(500).json({error: 'failed to retrieve restaurants'});
+		}
+		res.json(restaurants);
+	});
 });
 
 module.exports = router;
