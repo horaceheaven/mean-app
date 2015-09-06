@@ -34,8 +34,8 @@ exports.getRestaurants = function(next) {
 exports.getRestaurantDetails = function(restaurantId, next) {
 	var restaurants = require('../data/ordrx.json');
 
-	restaurants.forEach(function(element, index){
-		if(element.hasOwnProperty('id') && element.id === restaurantId) {
+	restaurants.forEach(function(element, index) {
+		if(element.hasOwnProperty('id') && element.id == restaurantId) {
 			return next(null, element);	
 		}
 	});

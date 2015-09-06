@@ -1,21 +1,18 @@
+<!-- This view isn't complete, need to get ordrx menu api data -->
 <div class="textwidget margin-top-30">
-  <h1>Eat Your Veggies Cafe</h1>
+  <h1 ng-bind="vm.restaurant.na"></h1>
 </div>
 <div class="widget">
-  <div class="category">
-    <h2>Classics</h2>
+  <strong ng-show="!vm.restaurant">Loading...</strong>
+  <div class="category" ng-repeat="cat in vm.restaurant">
+    <h2 ng-bind="cat.city"></h2>
     <ul>
-      <li><a href="#"><strong>Carrots</strong></a> - 4.00 - <em>root vegetables, usually orange</em></li>
-      <li><a href="#"><strong>Broccoli</strong></a> - 5.50 - <em>green plant in the cabbage family</em></li>
-      <li><a href="#"><strong>Spinach</strong></a> - 8.50 - <em>delicious flowering plant</em></li>
-    </ul>
-  </div>
-  <div class="category">
-    <h2>Oddities</h2>
-    <ul>
-      <li><a href="#"><strong>Romanesco</strong></a> - 8.00 - <em>like a cauliflower with fractals</em></li>
-      <li><a href="#"><strong>Fiddleheads</strong></a> - 3.50 - <em>baby ferns</em></li>
-      <li><a href="#"><strong>Kai-Lan</strong></a> - 2.00 - <em>Chinese broccoli</em></li>
+      <li ng-repeat="item in cat.children">
+        <a href="#">
+          <strong ng-bind="item.name"></strong>
+        </a>
+        - <span ng-bind="item.price"></span> - <em ng-bind="item.description"></em>
+      </li>
     </ul>
   </div>
 </div>
